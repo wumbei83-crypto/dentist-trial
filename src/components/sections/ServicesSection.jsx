@@ -1,19 +1,40 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-// Icons will map to the media we uploaded
-import AestheticIcon from '../../assets/media__1773642166530.png'; // glowing tooth
-import OrthoIcon from '../../assets/media__1773642166154.png';    // braces
-import WhiteningIcon from '../../assets/media__1773642166416.png'; // teeth
-import SurgicalIcon from '../../assets/media__1773642166245.png';  // tooth with flap
-// We don't have Implantology icon right now, we will reuse Surgical or similar as placeholder
-import ImplantIcon from '../../assets/media__1773642166530.png';  // placeholder
+
+// New High-End Asset Imports
+import AestheticIcon from '../../assets/aesthetic.webp';
+import OrthoIcon from '../../assets/braces.webp';
+import OrthoHoverIcon from '../../assets/invisalign.webp';
+import ImplantIcon from '../../assets/implantology.webp';
+import WhiteningIcon from '../../assets/whitening.webp';
+import SurgicalIcon from '../../assets/surgical.webp';
 
 const services = [
-  { id: 1, title: 'Aesthetic dentistry', image: AestheticIcon, desc: 'Smile restoration, built to last. Permanent, natural-looking tooth replacements.' },
-  { id: 2, title: 'Orthodontics', image: OrthoIcon, desc: 'Aligning your bite for perfect health and confidence with modern clear aligners.' },
-  { id: 3, title: 'Implantology', image: ImplantIcon, desc: 'Using 3D-guided surgery, our implants restore full chewing function and aesthetics with precise fit, bone integration, and lifelike ceramic crowns.' },
-  { id: 4, title: 'Whitening', image: WhiteningIcon, desc: 'Professional whitening treatments that safely lift stains and restore your bright smile.' },
-  { id: 5, title: 'Surgical dentistry', image: SurgicalIcon, desc: 'Expert surgical care from extractions to bone grafting, prioritizing comfort.' },
+  { 
+    id: 1, title: 'Aesthetic dentistry', image: AestheticIcon, 
+    shortDesc: 'Flawless smile design, built for confidence', 
+    desc: 'From dental veneers to full restorations, we perfectly map out natural-looking, beautiful confident smiles tailored exactly for you.' 
+  },
+  { 
+    id: 2, title: 'Orthodontics', image: OrthoIcon, hoverImage: OrthoHoverIcon,
+    shortDesc: 'Perfect alignment, clear & comfortable', 
+    desc: 'We gently align your bite for optimal health and aesthetics using both traditional braces and modern, nearly invisible clear aligners.' 
+  },
+  { 
+    id: 3, title: 'Implantology', image: ImplantIcon, 
+    shortDesc: 'Smile restoration, built to last', 
+    desc: 'Permanent, natural-looking tooth replacements. Using 3D-guided surgery, our implants restore full chewing function and aesthetics with precise fit, bone integration, and lifelike ceramic crowns.' 
+  },
+  { 
+    id: 4, title: 'Whitening', image: WhiteningIcon, 
+    shortDesc: 'Brilliant white, safely achieved', 
+    desc: 'Professional teeth whitening treatments designed to safely lift deep stains and instantly restore your vibrant, bright smile without causing sensitivity.' 
+  },
+  { 
+    id: 5, title: 'Surgical dentistry', image: SurgicalIcon, 
+    shortDesc: 'Pain-free care, expert precision', 
+    desc: 'Offering expert tooth extraction, advanced root canal treatments, and comprehensive surgical dentistry in a completely sterile, comfortable environment.' 
+  },
 ];
 
 export default function ServicesSection() {
@@ -38,55 +59,111 @@ export default function ServicesSection() {
       </div>
 
       <div style={styles.cardsContainer} onMouseLeave={() => setHoveredId(null)}>
-        {services.map((service) => (
-          <motion.div
-            key={service.id}
-            onMouseEnter={() => setHoveredId(service.id)}
-            animate={{ width: getCardWidth(service.id) }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            style={{
-              ...styles.card,
-              background: hoveredId === service.id ? 'var(--color-primary-light)' : 'var(--color-primary)'
-            }}
-          >
-            <div style={styles.cardImageContainer}>
-               <img src={service.image} alt={service.title} style={styles.cardImage} />
-            </div>
-            
-            {/* Title - always visible, shifts position based on hover */}
-            <motion.h3 
+        {services.map((service) => {
+          const isHovered = hoveredId === service.id;
+          return (
+            <motion.div
               layout
+              key={service.id}
+              onMouseEnter={() => setHoveredId(service.id)}
+              animate={{ width: getCardWidth(service.id) }}
+              transition={{ type: 'spring', stiffness: 300, damping: 25 }}
               style={{
-                ...styles.cardTitle,
-                textAlign: hoveredId === service.id ? 'left' : 'center',
-                paddingLeft: hoveredId === service.id ? '1rem' : '0'
+                ...styles.card,
+                // Soft whitish glare applied from the bottom upwards matching the mockup precisely
+                background: isHovered 
+                  ? 'radial-gradient(circle at 50% 90%, #468ce3 0%, #1555a6 70%, #0a3a78 100%)' 
+                  : 'radial-gradient(circle at 50% 110%, #3e81d6 0%, #1254a6 60%, #0a3a78 100%)'
               }}
             >
-              {service.title}
-            </motion.h3>
-
-            {/* Description - only visible on hover */}
-            <AnimatePresence>
-              {hoveredId === service.id && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  exit={{ opacity: 0, height: 0 }}
-                  transition={{ duration: 0.2 }}
-                  style={styles.cardDesc}
-                >
-                  <p>{service.desc}</p>
+              <div style={{ display: 'flex', width: '100%', height: '100%' }}>
+                
+                {/* Left Side: Icon and Title */}
+                <motion.div layout style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '1rem', minWidth: '130px', justifyContent: 'space-between' }}>
+                  <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '0.5rem' }}>
+                     <motion.img 
+                       key={isHovered && service.hoverImage ? 'hovered' : 'static'}
+                       initial={{ opacity: 0.6 }}
+                       animate={{ opacity: 1 }}
+                       transition={{ duration: 0.2 }}
+                       src={isHovered && service.hoverImage ? service.hoverImage : service.image} 
+                       alt={service.title} 
+                       className={service.id === 1 || service.id === 5 ? "service-icon-normal" : "service-icon-zoomed"}
+                       style={{ 
+                         width: '100%', height: '100%', maxHeight: '220px', 
+                         objectFit: 'contain', 
+                         transition: 'transform 0.3s ease'
+                       }} 
+                     />
+                  </div>
+                  <motion.h3 layout style={{ ...styles.cardTitle, textAlign: 'center', paddingBottom: '0.5rem', fontSize: '1.2rem' }}>
+                    {service.title}
+                  </motion.h3>
                 </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-        ))}
+
+                {/* Right Side: Hidden Panel Revealed on Hover */}
+                <AnimatePresence>
+                  {isHovered && (
+                    <motion.div
+                      layout
+                      initial={{ opacity: 0, width: 0, paddingLeft: 0, marginLeft: 0 }}
+                      animate={{ opacity: 1, width: '240px', paddingLeft: '1.5rem', marginLeft: '0.5rem' }}
+                      exit={{ opacity: 0, width: 0, paddingLeft: 0, marginLeft: 0 }}
+                      transition={{ duration: 0.3, ease: 'easeOut' }}
+                      style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'center',
+                        overflow: 'hidden',
+                        borderLeft: '1px solid rgba(255,255,255,0.1)' // subtle vertical panel divider
+                      }}
+                    >
+                      <div style={{ width: '220px', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                        
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginTop: '2.5rem' }}>
+                          <h4 style={{ fontSize: '1rem', lineHeight: '1.4', margin: 0, fontWeight: '600', color: 'var(--color-white)', maxWidth: '150px' }}>
+                            {service.shortDesc}
+                          </h4>
+                          <motion.div 
+                            whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.3)' }}
+                            style={{ width: '38px', height: '38px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.15)', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer', flexShrink: 0 }}
+                          >
+                            <span style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>↗</span>
+                          </motion.div>
+                        </div>
+                        
+                        <div style={{ marginTop: 'auto', marginBottom: '1.5rem' }}>
+                          <p style={{ fontSize: '0.85rem', lineHeight: '1.5', opacity: 0.85, margin: 0, letterSpacing: '0.02em' }}>
+                            {service.desc}
+                          </p>
+                        </div>
+
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+              </div>
+            </motion.div>
+          );
+        })}
       </div>
 
       <div style={styles.actionContainer}>
-        <button className="btn btn-primary" style={styles.scheduleBtn}>
-          🗓️ Schedule a visit
-        </button>
+        <motion.button 
+          whileHover={{ scale: 1.05 }}
+          style={styles.scheduleBtn}
+        >
+          <div style={styles.calendarCircle}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+          </div>
+          Schedule a visit
+        </motion.button>
       </div>
     </section>
   );
@@ -124,19 +201,19 @@ const styles = {
   cardsContainer: {
     display: 'flex',
     gap: '2rem',
-    height: '400px', // Fixed height for cards
+    height: '330px', // Matches premium mockup ratio
     width: '100%',
   },
   card: {
     borderRadius: 'var(--radius-md)',
-    padding: '1.5rem',
+    padding: 0,
     display: 'flex',
     flexDirection: 'column',
     position: 'relative',
     overflow: 'hidden',
     cursor: 'pointer',
     color: 'var(--color-white)',
-    boxShadow: '0px 10px 30px rgba(18, 84, 166, 0.1)',
+    boxShadow: '0px 10px 30px rgba(18, 84, 166, 0.15)',
   },
   cardImageContainer: {
     flex: 1,
@@ -174,7 +251,29 @@ const styles = {
     marginTop: '4rem'
   },
   scheduleBtn: {
-    padding: '1rem 2.5rem',
-    fontSize: '1.1rem'
+    display: 'flex',
+    alignItems: 'center',
+    gap: '1rem',
+    padding: '0.4rem 1.8rem 0.4rem 0.4rem',
+    fontSize: '1.05rem',
+    fontWeight: '500',
+    borderRadius: '50px',
+    boxShadow: '0 8px 24px rgba(18, 84, 166, 0.3)',
+    background: 'linear-gradient(90deg, #3fa1f0 0%, var(--color-primary) 70%, var(--color-primary-dark) 100%)',
+    color: 'var(--color-white)',
+    textShadow: '0 1px 2px rgba(10, 58, 120, 0.5)',
+    border: 'none',
+    cursor: 'pointer'
+  },
+  calendarCircle: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '38px',
+    height: '38px',
+    borderRadius: '50%',
+    background: 'rgba(255,255,255,0.2)',
+    color: 'var(--color-white)',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.1)'
   }
 };
