@@ -19,7 +19,6 @@ export default function HeroSection() {
           <a href="#about" style={styles.navLink}>About us</a>
           <a href="#services" style={styles.navLink}>Services</a>
           <a href="#specialists" style={styles.navLink}>Specialists</a>
-          <a href="#calculator" style={styles.navLink}>Calculator</a>
           <a href="#testimonials" style={styles.navLink}>Testimonials</a>
         </nav>
         <div className="desktop-contact" style={styles.contact}>Contact</div>
@@ -35,9 +34,8 @@ export default function HeroSection() {
             className="hero-heading-left"
             style={styles.mainHeading}
           >
-            <span className="h1-line-1" style={{ display: 'inline-block', paddingLeft: '2.5rem' }}>Not all smiles</span><br className="mobile-hide-br" />
-            <span className="h1-line-2">need fixing, some</span><br className="mobile-hide-br" />
-            <span className="h1-line-3">need vision</span>
+            <span className="h1-line-1">Your Smile,</span><br className="mobile-hide-br" />
+            <span className="h1-line-2">Handled Right.</span>
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -47,7 +45,7 @@ export default function HeroSection() {
             style={styles.subtext}
           >
             We're a premium orthodontic and aesthetic<br className="mobile-hide-br" />
-            dental clinic in Northern Region Ghana, crafting<br className="mobile-hide-br" />
+            dental clinic in Tamale - Northern Region of Ghana, crafting<br className="mobile-hide-br" />
             confident smiles for those who settle for nothing ordinary.
           </motion.p>
         </div>
@@ -100,6 +98,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             style={{ width: 'fit-content' }}
+            className="hero-cta-wrapper"
           >
             <motion.button
               animate={{ 
@@ -114,6 +113,7 @@ export default function HeroSection() {
               whileHover={{ scale: 1.06 }}
               className="hero-cta"
               style={styles.ctaButton}
+              onClick={() => document.getElementById('consultation')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <div style={styles.calendarCircle}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -226,12 +226,12 @@ const styles = {
     zIndex: 1
   },
   mainHeading: {
-    fontSize: '3.6rem',
+    fontSize: '4.8rem',
     color: 'var(--color-primary-dark)',
     marginBottom: '1rem',
     lineHeight: '1.1',
     letterSpacing: '-0.02em',
-    fontWeight: '500',
+    fontWeight: '600',
     whiteSpace: 'nowrap'
   },
   subtext: {

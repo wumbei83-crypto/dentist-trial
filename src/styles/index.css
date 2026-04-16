@@ -239,18 +239,12 @@ p {
     margin-bottom: 0 !important;
     padding-top: 1rem !important;
   }
-  .h1-line-1 {
-    text-align: right !important;
-    padding-right: 1.5rem !important;
-    padding-left: 0 !important;
-  }
-  .h1-line-2 {
-    text-align: left !important;
-    padding-left: 1.5rem !important;
-  }
+  .h1-line-1,
+  .h1-line-2,
   .h1-line-3 {
     text-align: left !important;
     padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
   }
   .tooth-wrapper {
     order: 2 !important;
@@ -289,8 +283,14 @@ p {
   .hero-faded-text {
     font-size: 3.5rem !important;
   }
-  .hero-cta {
+  .hero-cta-wrapper {
     order: 5 !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: center !important;
+    margin: 0 auto !important;
+  }
+  .hero-cta {
     width: fit-content !important;
     margin: 0 auto !important;
     justify-content: center !important;

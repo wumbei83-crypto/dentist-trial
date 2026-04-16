@@ -26,7 +26,7 @@ const PulseRing = ({ delay = 0, size = "300px" }) => (
 
 export default function ConsultationSection() {
   return (
-    <section className="consultation-section" style={styles.section}>
+    <section id="consultation" className="consultation-section" style={styles.section}>
       {/* Left Decor Container */}
       <div className="left-decor" style={styles.leftDecor}>
         <PulseRing delay={0} size="450px" />
@@ -73,10 +73,13 @@ export default function ConsultationSection() {
           <div className="form-row" style={styles.formRow}>
             <div style={styles.selectWrapper}>
               <select defaultValue="" style={{ ...styles.inputField, appearance: 'none', cursor: 'pointer', color: '#666' }}>
-                <option value="" disabled>Service</option>
-                <option value="aesthetic">Aesthetic Dentistry</option>
-                <option value="orthodontics">Orthodontics</option>
-                <option value="implantology">Implantology</option>
+                <option value="" disabled>Reason for visit</option>
+                <option value="tooth_pains">Tooth Pains</option>
+                <option value="teeth_whitening">Teeth Whitening</option>
+                <option value="dentures">Dentures</option>
+                <option value="implant">Implant</option>
+                <option value="regular_checkup">Regular Check-up</option>
+                <option value="other">Other</option>
               </select>
               <div style={styles.dropdownIcon}>
                 <svg width="12" height="8" viewBox="0 0 12 8" fill="none" stroke="#666" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -108,7 +111,7 @@ export default function ConsultationSection() {
               style={styles.submitBtn}
               whileHover={{ scale: 1.05, boxShadow: '0 8px 24px rgba(10, 58, 120, 0.4)' }}
             >
-              Send request
+              Book Now
             </motion.button>
             <p className="privacy-text" style={styles.privacyText}>
               By clicking this button you accept <a href="#" style={styles.link}>Privacy Policy</a>
