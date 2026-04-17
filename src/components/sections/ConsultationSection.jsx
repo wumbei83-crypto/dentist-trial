@@ -67,10 +67,12 @@ export default function ConsultationSection() {
 
   useEffect(() => {
     const checkStatus = () => {
-      // Ghana is GMT+0 year-round. Get current hour and day in UTC.
-      const now = new Date();
-      const currentHour = now.getUTCHours();
-      const currentDay = now.getUTCDay(); // 0 is Sunday, 1 is Monday...
+      // Always securely fetch the exact wall-clock time in Ghana regardless of visitor's location timezone
+      const ghanaTimeStr = new Date().toLocaleString("en-US", { timeZone: "Africa/Accra" });
+      const ghanaDate = new Date(ghanaTimeStr);
+      
+      const currentHour = ghanaDate.getHours();
+      const currentDay = ghanaDate.getDay(); // 0 is Sunday, 1 is Monday...
       
       // Open Monday (1) to Saturday (6), from 8 AM to 4:59 PM.
       const isWorkingDay = currentDay !== 0;
