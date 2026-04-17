@@ -63,7 +63,7 @@ const AccordionItem = ({ question, answer, isOpen, onClick }) => {
 };
 
 export default function FAQSection() {
-  const [openIndex, setOpenIndex] = useState(0); // First item open by default
+  const [openIndex, setOpenIndex] = useState(null); // All items closed by default
 
   const handleToggle = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -99,6 +99,7 @@ export default function FAQSection() {
              <motion.button 
                whileHover={{ scale: 1.05, boxShadow: '0 8px 24px rgba(10, 58, 120, 0.2)' }}
                style={styles.contactBtn}
+               onClick={() => document.getElementById('contact')?.scrollIntoView({behavior: 'smooth'})}
              >
                 Contact our clinic
              </motion.button>

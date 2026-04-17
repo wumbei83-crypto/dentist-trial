@@ -3,10 +3,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ReactCompareSlider, ReactCompareSliderImage } from 'react-compare-slider';
 import beforeImg from '../../assets/before.jpg';
 import afterImg from '../../assets/after.jpg';
-import orthoBefore from '../../assets/ortho-before.jpg';
-import orthoAfter from '../../assets/ortho-after.jpg';
-import implantBefore from '../../assets/implant-before.jpg';
-import implantAfter from '../../assets/implant-after.jpg';
+import newOrthoBefore from '../../assets/orthodontics-new-before.webp';
+import newOrthoAfter from '../../assets/orthodontics-new-after.webp';
+import newImplantBefore from '../../assets/implantology-new-before.webp';
+import newImplantAfter from '../../assets/implantology-new-after.webp';
+import newWhiteningBefore from '../../assets/whitening-new-before.webp';
+import newWhiteningAfter from '../../assets/whitening-new-after.webp';
 
 const testimonialsData = [
   {
@@ -19,8 +21,8 @@ const testimonialsData = [
       "Minimal tooth preparation to preserve enamel",
       "Placement of ultra-thin porcelain veneers"
     ],
-    before: beforeImg,
-    after: afterImg,
+    before: afterImg,
+    after: beforeImg,
     reviewQuote: '"Life changing experience."',
     reviewDesc: "Choosing Cornerstone Dental was the best decision for my oral health. The entire team is simply phenomenal and the results literally speak for themselves. Highly recommended!"
   },
@@ -34,8 +36,8 @@ const testimonialsData = [
       "Custom clear aligner therapy formulation",
       "Progressive bite correction and alignment"
     ],
-    before: orthoAfter,
-    after: orthoBefore,
+    before: newOrthoBefore,
+    after: newOrthoAfter,
     reviewQuote: '"I finally have the smile I always wanted."',
     reviewDesc: "I never thought my teeth could look this straight. The clear aligner process was so easy and the team at Cornerstone made every visit an absolute pleasure."
   },
@@ -49,8 +51,8 @@ const testimonialsData = [
       "Surgical placement of titanium dental implants",
       "Custom color-matched porcelain crown restoration"
     ],
-    before: implantBefore,
-    after: implantAfter,
+    before: newImplantBefore,
+    after: newImplantAfter,
     reviewQuote: '"I got my original smile back!"',
     reviewDesc: "Losing my teeth affected my confidence for years. The implant procedure at Cornerstone in Tamale was surprisingly painless. My new teeth feel completely natural, and I can finally eat whatever I want!"
   },
@@ -64,8 +66,8 @@ const testimonialsData = [
       "In-office laser acceleration session",
       "Custom take-home maintenance kit"
     ],
-    before: beforeImg,
-    after: afterImg,
+    before: newWhiteningBefore,
+    after: newWhiteningAfter,
     reviewQuote: '"Unbelievable instant results!"',
     reviewDesc: "I couldn't believe the difference after just one session! My teeth are shades whiter and I couldn't stop smiling at my event. The laser whitening was completely comfortable."
   }
@@ -148,8 +150,8 @@ export default function TestimonialsSection() {
                   <div style={styles.afterLabel}>After</div>
                   
                   <ReactCompareSlider
-                    itemOne={<ReactCompareSliderImage src={currentData.after} alt="After treatment" />}
-                    itemTwo={<ReactCompareSliderImage src={currentData.before} alt="Before treatment" />}
+                    itemOne={<ReactCompareSliderImage src={currentData.before} alt="Before treatment" />}
+                    itemTwo={<ReactCompareSliderImage src={currentData.after} alt="After treatment" />}
                     style={{ width: '100%', height: '100%', borderRadius: '16px' }}
                   />
                 </div>
@@ -302,7 +304,7 @@ const styles = {
   sliderWrapper: {
     position: 'relative',
     width: '100%',
-    height: '450px',
+    height: '380px',
     borderRadius: '16px',
     boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
     overflow: 'hidden',

@@ -12,8 +12,21 @@ export default function ContactSection() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    const message = `*New Contact Inquiry*
+    
+Name: ${formData.name}
+Phone: ${formData.phone || 'Not provided'}
+Email: ${formData.email || 'Not provided'}
+
+Message:
+${formData.message}`;
+
+    const whatsappUrl = `https://wa.me/233244791435?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+
     setSent(true);
-    setTimeout(() => setSent(false), 4000);
+    setTimeout(() => setSent(false), 5000);
     setFormData({ name: '', phone: '', email: '', message: '' });
   };
 

@@ -109,3 +109,14 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+@media (max-width: 768px) {
+  .mobile-reduce-btn {
+    padding: 0.8rem 1.4rem !important;
+    font-size: 0.95rem !important;
+  }
+  .mobile-reduce-badge {
+    padding: 0.4rem 1rem !important;
+    font-size: 0.75rem !important;
+  }
+}

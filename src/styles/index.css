@@ -314,7 +314,50 @@ p {
     max-width: 100% !important;
   }
   .service-icon-zoomed {
-    transform: scale(1.6) !important; /* Phone parameter rigidly locked */
+    transform: scale(1.15) !important; /* Phone parameter shrunk down to match others */
+  }
+  .service-icon-implant {
+    transform: scale(1.15) !important; /* Phone parameter separately constrained */
+  }
+  .service-icon-reduced {
+    transform: scale(0.65) !important;
+  }
+
+  /* Mobile Interactions */
+  .mobile-hide-flex-placeholder {
+    display: none !important;
+  }
+  .mobile-info-badge {
+    display: flex !important;
+  }
+  
+  @keyframes breatheTitleGlow {
+    0% { opacity: 0.8; text-shadow: 0 0 0px rgba(255, 255, 255, 0); }
+    50% { opacity: 1; text-shadow: 0 0 20px rgba(255, 255, 255, 0.7); }
+    100% { opacity: 0.8; text-shadow: 0 0 0px rgba(255, 255, 255, 0); }
+  }
+
+  .mobile-pulse-title {
+    animation: breatheTitleGlow 3s infinite ease-in-out !important;
+  }
+
+  /* Responsive Panel Constraints */
+  .service-hidden-inner {
+    width: 190px !important;
+    min-width: 190px !important;
+    flex-shrink: 0 !important;
+    padding-right: 0.5rem !important;
+    gap: 0.8rem !important;
+  }
+  .service-panel-arrow {
+    display: none !important;
+  }
+  .service-panel-heading {
+    font-size: 0.85rem !important;
+  }
+  .service-panel-desc {
+    font-size: 0.72rem !important;
+    line-height: 1.35 !important;
   }
 
   /* Consultation Mobile Constraints */
@@ -389,6 +432,12 @@ p {
 .service-icon-zoomed {
   transform: scale(1.95); /* Desktop explicit premium zoom */
 }
+.service-icon-implant {
+  transform: scale(1.95); /* Maintain desktop zoom for implant */
+}
+.service-icon-reduced {
+  transform: scale(0.70); /* Reduce images with full bounding boxes */
+}
 
 /* Insurance Marquee Logos */
 .insurance-logo-img {
@@ -407,4 +456,8 @@ p {
   filter: grayscale(0%) opacity(100%);
   transform: scale(1.05);
   box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 1024px) {
+  .desktop-search { display: none !important; }
 }

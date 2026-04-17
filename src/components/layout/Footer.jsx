@@ -64,7 +64,7 @@ export default function Footer() {
         <div style={styles.infoCol}>
           <p style={styles.colHeading}>FOLLOW US</p>
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/cornerstonedentalclinic?igsh=eHhjcGFnNmYwenMx"
             target="_blank"
             rel="noopener noreferrer"
             style={styles.socialLink}
@@ -73,13 +73,13 @@ export default function Footer() {
             <span>Instagram</span>
           </a>
           <a
-            href="https://facebook.com"
+            href="https://www.tiktok.com/@cornerstonedentalclinic?_r=1&_t=ZS-95bgPtCjmEv"
             target="_blank"
             rel="noopener noreferrer"
             style={styles.socialLink}
           >
-            <svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            <span>Facebook</span>
+            <svg width="16" height="16" fill="white" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 2.53-1.41 4.96-3.48 6.27-2.06 1.34-4.71 1.6-6.98.66-2.28-.9-4.04-2.8-4.66-5.1-.64-2.32-.01-4.88 1.54-6.73 1.5-1.8 3.79-2.73 6.1-2.58.05 1.4.03 2.8.03 4.2-.95-.15-1.94.02-2.78.47-.85.45-1.46 1.25-1.67 2.19-.21.9.06 1.86.72 2.53.66.65 1.6.93 2.51.78.93-.16 1.7-.82 2-1.68.14-.38.2-.8.2-1.22-.05-5.63-.03-11.26-.06-16.89z"/></svg>
+            <span>TikTok</span>
           </a>
         </div>
 
@@ -96,7 +96,18 @@ export default function Footer() {
         <div style={styles.legalLinks}>
           {legalLinks.map((item, i) => (
             <React.Fragment key={item}>
-              <a href="#" style={styles.legalLink}>{item}</a>
+              <a 
+                href="#" 
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (item === 'Privacy policy') {
+                    window.dispatchEvent(new Event('open-privacy-modal'));
+                  }
+                }}
+                style={styles.legalLink}
+              >
+                {item}
+              </a>
               {i < legalLinks.length - 1 && <span style={styles.legalDot}>·</span>}
             </React.Fragment>
           ))}

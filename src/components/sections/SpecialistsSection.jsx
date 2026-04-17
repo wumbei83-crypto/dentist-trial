@@ -1,12 +1,5 @@
 import React from 'react';
-
-const specialist = {
-  name: 'Dr. David Wilson',
-  role: 'Lead Specialist & Founder',
-  desc: 'Crafting elite aesthetic transformations and providing the best dental care in Tamale. Dr. Wilson combines years of experience with a shared passion for truly personalized care.',
-  years: '2016',
-  img: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?w=800&h=1000&fit=crop'
-};
+import ClinicExperts from '../../assets/clinic-experts.webp';
 
 export default function SpecialistsSection() {
   return (
@@ -14,20 +7,25 @@ export default function SpecialistsSection() {
       <div style={styles.header}>
         <div style={styles.titleArea}>
           <h2 style={styles.heading}>
-            Meet the mind<br/>behind your smile
+            The experts behind<br/>your confident smile
           </h2>
         </div>
         <p style={styles.desc}>
-          Our dedicated lead specialist brings precision, empathy,<br/>
-          and artistry to every treatment — representing a standard<br/>
-          of excellence in Northern Ghana.
+          Our clinic is home to a dedicated team of fully qualified, licensed,<br/>
+          and registered professionals, offering an unparalleled standard<br/>
+          of comprehensive in-house dental care.
         </p>
       </div>
 
       <div style={styles.singleSpecialistContainer}>
         <div style={styles.imageColumn}>
           <div style={styles.imgWrapper}>
-            <img src={specialist.img} alt={specialist.name} style={styles.singleImg} />
+            {/* Real clinic photo of dentist and patient */}
+            <img 
+              src={ClinicExperts} 
+              alt="Our experts at work" 
+              style={styles.singleImg} 
+            />
           </div>
           <div style={styles.awardPlaque}>
             <div style={styles.awardIconWrapper}>
@@ -37,40 +35,52 @@ export default function SpecialistsSection() {
             </div>
             <div style={styles.awardContent}>
               <span style={styles.awardKicker}>Award Winner</span>
-              <span style={styles.awardTitle}>Best Dental Services in Northern Ghana</span>
+              <span style={styles.awardTitle}>Best Dental Services<br/>in Tamale</span>
+              <span style={{ fontSize: '0.8rem', fontWeight: '500', color: 'var(--color-text-dark)', opacity: 0.7, marginTop: '0.3rem' }}>
+                Northern Ghana Business Merit Awards
+              </span>
             </div>
           </div>
         </div>
         
         <div style={styles.infoColumn}>
-          <span style={styles.roleBadgeSingle}>{specialist.role}</span>
-          <h3 style={styles.drNameSingle}>{specialist.name}</h3>
-          <p style={styles.drDescSingle}>{specialist.desc}</p>
-          <p style={styles.drYearsSingle}>Practicing since {specialist.years}</p>
+          <span style={styles.roleBadgeSingle}>Our Expertise</span>
+          <h3 style={styles.drNameSingle}>Qualified & Licensed Team</h3>
+          <p style={styles.drDescSingle}>
+            We pride ourselves on offering complete, state-of-the-art dental care all under one roof. Our multidisciplinary team ensures every diagnosis and treatment is handled by experienced, locally registered experts who combine unmatched precision with genuine empathy and care.
+          </p>
+          <p style={styles.drYearsSingle}>Setting a standard of excellence</p>
           
           <ul style={styles.specialtiesList}>
             <li style={styles.specialtyItem}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={styles.checkIcon}>
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
-              Advanced Orthodontics & Aligners
+              Fully Certified Practitioners
             </li>
             <li style={styles.specialtyItem}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={styles.checkIcon}>
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
-              Cosmetic Transformations
+              Comprehensive In-House Care
             </li>
             <li style={styles.specialtyItem}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={styles.checkIcon}>
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>
-              Painless Implantology
+              Locally & Nationally Registered
             </li>
           </ul>
 
-          <button className="btn btn-primary" style={{marginTop: '2.5rem', padding: '1rem 2rem', borderRadius: '50px', fontSize: '1.05rem', boxShadow: '0 8px 24px rgba(18, 84, 166, 0.3)'}}>
-            Read full profile →
+          <button 
+            className="btn btn-primary mobile-reduce-btn" 
+            style={{marginTop: '2.5rem', padding: '1rem 2rem', borderRadius: '50px', fontSize: '1.05rem', boxShadow: '0 8px 24px rgba(18, 84, 166, 0.3)'}}
+            onClick={() => {
+              const section = document.getElementById('contact');
+              if (section) section.scrollIntoView({ behavior: 'smooth' });
+            }}
+          >
+            Learn more about our practice →
           </button>
         </div>
       </div>
@@ -146,7 +156,7 @@ const styles = {
     alignItems: 'center',
     gap: '1rem',
     boxShadow: '0 15px 35px rgba(0,0,0,0.1)',
-    maxWidth: '280px',
+    maxWidth: '340px',
     border: '1px solid rgba(255,255,255,0.8)',
     zIndex: 5
   },

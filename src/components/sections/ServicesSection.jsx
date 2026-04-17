@@ -6,14 +6,15 @@ import AestheticIcon from '../../assets/aesthetic.webp';
 import OrthoIcon from '../../assets/braces.webp';
 import OrthoHoverIcon from '../../assets/invisalign.webp';
 import ImplantIcon from '../../assets/implantology.webp';
-import WhiteningIcon from '../../assets/whitening.webp';
+import ProstheticsIcon from '../../assets/prosthetics-new.png';
 import SurgicalIcon from '../../assets/surgical.webp';
+import PreventiveIcon from '../../assets/preventive.webp';
 
 const services = [
   { 
     id: 1, title: 'Aesthetic dentistry', image: AestheticIcon, 
     shortDesc: 'Flawless smile design, built for confidence', 
-    desc: 'From dental veneers to full restorations, we perfectly map out natural-looking, beautiful confident smiles tailored exactly for you.' 
+    desc: 'From dental veneers and teeth whitening to full restorations, we perfectly map out natural-looking, beautiful confident smiles tailored exactly for you.' 
   },
   { 
     id: 2, title: 'Orthodontics', image: OrthoIcon, hoverImage: OrthoHoverIcon,
@@ -26,15 +27,20 @@ const services = [
     desc: 'Permanent, natural-looking tooth replacements. Using 3D-guided surgery, our implants restore full chewing function and aesthetics with precise fit, bone integration, and lifelike ceramic crowns.' 
   },
   { 
-    id: 4, title: 'Whitening', image: WhiteningIcon, 
-    shortDesc: 'Brilliant white, safely achieved', 
-    desc: 'Professional teeth whitening treatments designed to safely lift deep stains and instantly restore your vibrant, bright smile without causing sensitivity.' 
+    id: 4, title: 'Dental Prosthetics', image: ProstheticsIcon, 
+    shortDesc: 'Functional aesthetics, flawlessly restored', 
+    desc: 'High-quality, custom-crafted dental prosthetics designed to perfectly restore your natural bite, chewing comfort, and smile dynamics with long-lasting ceramic precision.' 
   },
   { 
     id: 5, title: 'Surgical dentistry', image: SurgicalIcon, 
     shortDesc: 'Pain-free care, expert precision', 
     desc: 'Offering expert tooth extraction, advanced root canal treatments, and comprehensive surgical dentistry in a completely sterile, comfortable environment.' 
   },
+  {
+    id: 6, title: 'Preventive Care', image: PreventiveIcon,
+    shortDesc: 'Proactive defense, optimal health',
+    desc: 'Comprehensive check-ups, deep cleanings, and advanced diagnostics strictly designed to safeguard your long-term oral health and prevent future complications.'
+  }
 ];
 
 export default function ServicesSection() {
@@ -42,13 +48,13 @@ export default function ServicesSection() {
 
   // When hovering on a card, it expands relative to others
   const getCardWidth = (id) => {
-    if (hoveredId === null) return 'calc(20% - 1.6rem)'; // default equal width
-    if (hoveredId === id) return '40%'; // Expanded width
-    return '15%'; // Compressed width
+    if (hoveredId === null) return 'calc(16.66% - 1rem)'; // 6 cards default equal width
+    if (hoveredId === id) return '35%'; // Expanded width
+    return 'calc(13% - 1rem)'; // Compressed width
   };
 
   return (
-    <section id="services" style={styles.section}>
+    <section id="services" style={styles.section} onClick={() => setHoveredId(null)}>
       <div style={styles.header}>
         <p style={styles.kicker}>SERVICES</p>
         <h2 style={styles.heading}>Expert care for every smile</h2>
@@ -63,11 +69,14 @@ export default function ServicesSection() {
           const isHovered = hoveredId === service.id;
           return (
             <motion.div
-              layout
               key={service.id}
               onMouseEnter={() => setHoveredId(service.id)}
+              onClick={(e) => {
+                e.stopPropagation(); // prevent background click from triggering
+                setHoveredId(isHovered ? null : service.id); // allow toggle to close
+              }}
               animate={{ width: getCardWidth(service.id) }}
-              transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+              transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
               style={{
                 ...styles.card,
                 // Soft whitish glare applied from the bottom upwards matching the mockup precisely
@@ -79,7 +88,35 @@ export default function ServicesSection() {
               <div style={{ display: 'flex', width: '100%', height: '100%' }}>
                 
                 {/* Left Side: Icon and Title */}
-                <motion.div layout style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '1rem', minWidth: '130px', justifyContent: 'space-between' }}>
+                <motion.div style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '1rem', minWidth: '130px', justifyContent: 'space-between', position: 'relative' }}>
+                  
+                  <motion.div 
+                    className="mobile-info-badge"
+                    animate={{ opacity: !isHovered ? 1 : 0 }}
+                    transition={{ duration: 0.3 }}
+                    style={{
+                       position: 'absolute',
+                       top: '0.8rem',
+                       right: '0.8rem',
+                       width: '24px',
+                       height: '24px',
+                       borderRadius: '50%',
+                       backgroundColor: 'rgba(255,255,255,0.15)',
+                       border: '1px solid rgba(255,255,255,0.1)',
+                       display: 'none', // overridden exclusively by mobile viewport CSS
+                       justifyContent: 'center',
+                       alignItems: 'center',
+                       fontSize: '0.9rem',
+                       fontWeight: '600',
+                       fontFamily: 'serif',
+                       fontStyle: 'italic',
+                       color: 'rgba(255,255,255,0.9)',
+                       pointerEvents: 'none',
+                       zIndex: 10
+                    }}
+                  >
+                    i
+                  </motion.div>
                   <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '0.5rem' }}>
                      <motion.img 
                        key={isHovered && service.hoverImage ? 'hovered' : 'static'}
@@ -88,7 +125,7 @@ export default function ServicesSection() {
                        transition={{ duration: 0.2 }}
                        src={isHovered && service.hoverImage ? service.hoverImage : service.image} 
                        alt={service.title} 
-                       className={service.id === 1 || service.id === 5 ? "service-icon-normal" : "service-icon-zoomed"}
+                       className={service.id === 4 || service.id === 6 ? "service-icon-reduced" : (service.id === 1 || service.id === 5 ? "service-icon-normal" : (service.id === 3 ? "service-icon-implant" : "service-icon-zoomed"))}
                        style={{ 
                          width: '100%', height: '100%', maxHeight: '220px', 
                          objectFit: 'contain', 
@@ -96,7 +133,10 @@ export default function ServicesSection() {
                        }} 
                      />
                   </div>
-                  <motion.h3 layout style={{ ...styles.cardTitle, textAlign: 'center', paddingBottom: '0.5rem', fontSize: '1.2rem' }}>
+                  <motion.h3 
+                    className={!isHovered ? "mobile-pulse-title" : ""}
+                    style={{ ...styles.cardTitle, textAlign: 'center', paddingBottom: '0.5rem', fontSize: '1.2rem' }}
+                  >
                     {service.title}
                   </motion.h3>
                 </motion.div>
@@ -105,26 +145,28 @@ export default function ServicesSection() {
                 <AnimatePresence>
                   {isHovered && (
                     <motion.div
-                      layout
-                      initial={{ opacity: 0, width: 0, paddingLeft: 0, marginLeft: 0 }}
-                      animate={{ opacity: 1, width: '240px', paddingLeft: '1.5rem', marginLeft: '0.5rem' }}
-                      exit={{ opacity: 0, width: 0, paddingLeft: 0, marginLeft: 0 }}
-                      transition={{ duration: 0.3, ease: 'easeOut' }}
+                      className="service-hidden-panel"
+                      initial={{ opacity: 0, width: '0%', paddingLeft: 0, marginLeft: 0 }}
+                      animate={{ opacity: 1, width: '65%', paddingLeft: '1.5rem', marginLeft: '0.5rem' }}
+                      exit={{ opacity: 0, width: '0%', paddingLeft: 0, marginLeft: 0 }}
+                      transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
                       style={{
                         display: 'flex',
                         flexDirection: 'column',
                         justifyContent: 'center',
                         overflow: 'hidden',
+                        flexShrink: 0,
                         borderLeft: '1px solid rgba(255,255,255,0.1)' // subtle vertical panel divider
                       }}
                     >
-                      <div style={{ width: '220px', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                      <div className="service-hidden-inner" style={{ width: '220px', display: 'flex', flexDirection: 'column', height: '100%' }}>
                         
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginTop: '2.5rem' }}>
-                          <h4 style={{ fontSize: '1rem', lineHeight: '1.4', margin: 0, fontWeight: '600', color: 'var(--color-white)', maxWidth: '150px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'flex-start', gap: '0.8rem', alignItems: 'flex-start', marginTop: '2.5rem' }}>
+                          <h4 className="service-panel-heading" style={{ fontSize: '1rem', lineHeight: '1.4', margin: 0, fontWeight: '600', color: 'var(--color-white)', maxWidth: '150px' }}>
                             {service.shortDesc}
                           </h4>
                           <motion.div 
+                            className="service-panel-arrow"
                             whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.3)' }}
                             style={{ width: '38px', height: '38px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.15)', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer', flexShrink: 0 }}
                           >
@@ -133,7 +175,7 @@ export default function ServicesSection() {
                         </div>
                         
                         <div style={{ marginTop: 'auto', marginBottom: '1.5rem' }}>
-                          <p style={{ fontSize: '0.85rem', lineHeight: '1.5', opacity: 0.85, margin: 0, letterSpacing: '0.02em' }}>
+                          <p className="service-panel-desc" style={{ fontSize: '0.85rem', lineHeight: '1.5', opacity: 0.85, margin: 0, letterSpacing: '0.02em' }}>
                             {service.desc}
                           </p>
                         </div>
@@ -153,6 +195,10 @@ export default function ServicesSection() {
         <motion.button 
           whileHover={{ scale: 1.05 }}
           style={styles.scheduleBtn}
+          onClick={() => {
+            const section = document.getElementById('consultation');
+            if (section) section.scrollIntoView({ behavior: 'smooth' });
+          }}
         >
           <div style={styles.calendarCircle}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -200,7 +246,7 @@ const styles = {
   },
   cardsContainer: {
     display: 'flex',
-    gap: '2rem',
+    gap: '1.2rem',
     height: '330px', // Matches premium mockup ratio
     width: '100%',
   },

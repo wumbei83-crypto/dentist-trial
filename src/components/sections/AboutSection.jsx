@@ -68,8 +68,8 @@ export default function AboutSection() {
           
           <div className="about-right-col" style={styles.rightCol}>
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', justifyContent: 'flex-end' }}>
-              <div style={styles.aboutBadge}>ABOUT US</div>
-              <div style={styles.hefraBadge}>
+              <div className="mobile-reduce-badge" style={styles.aboutBadge}>ABOUT US</div>
+              <div className="mobile-reduce-badge" style={styles.hefraBadge}>
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '6px', color: '#4ade80'}}>
                   <path d="M22 11.08V12a10 10 10 0 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline>
                 </svg>

@@ -8,6 +8,7 @@ import SpecialistsSection from './components/sections/SpecialistsSection';
 import TestimonialsSection from './components/sections/TestimonialsSection';
 import FAQSection from './components/sections/FAQSection';
 import ContactSection from './components/sections/ContactSection';
+import PrivacyModal from './components/PrivacyModal';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <TestimonialsSection />
       <FAQSection />
       <ContactSection />
+      <PrivacyModal />
     </Layout>
   );
 }
