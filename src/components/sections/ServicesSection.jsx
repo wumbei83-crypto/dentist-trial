@@ -45,16 +45,27 @@ const services = [
 
 export default function ServicesSection() {
   const [hoveredId, setHoveredId] = useState(null);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 768 : false);
 
-  // When hovering on a card, it expands relative to others
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const getCardWidth = (id) => {
+    if (isMobile) {
+      if (hoveredId === null) return 'calc(16.66% - 0.4rem)'; 
+      if (hoveredId === id) return '75%'; 
+      return 'calc(5% - 0.4rem)'; 
+    }
     if (hoveredId === null) return 'calc(16.66% - 1rem)'; // 6 cards default equal width
     if (hoveredId === id) return '35%'; // Expanded width
     return 'calc(13% - 1rem)'; // Compressed width
   };
 
   return (
-    <section id="services" style={styles.section} onClick={() => setHoveredId(null)}>
+    <section id="services" style={{ ...styles.section, padding: isMobile ? '4rem 1rem' : '6rem 4rem' }} onClick={() => setHoveredId(null)}>
       <div style={styles.header}>
         <p style={styles.kicker}>SERVICES</p>
         <h2 style={styles.heading}>Expert care for every smile</h2>
@@ -64,7 +75,7 @@ export default function ServicesSection() {
         </p>
       </div>
 
-      <div style={styles.cardsContainer} onMouseLeave={() => setHoveredId(null)}>
+      <div style={{ ...styles.cardsContainer, gap: isMobile ? '0.4rem' : '1.2rem' }} onMouseLeave={() => setHoveredId(null)}>
         {services.map((service) => {
           const isHovered = hoveredId === service.id;
           return (
@@ -88,7 +99,7 @@ export default function ServicesSection() {
               <div style={{ display: 'flex', width: '100%', height: '100%' }}>
                 
                 {/* Left Side: Icon and Title */}
-                <motion.div style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: '1rem', minWidth: '130px', justifyContent: 'space-between', position: 'relative' }}>
+                <motion.div style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: isMobile ? '0.5rem' : '1rem', minWidth: isMobile ? '40px' : '130px', justifyContent: 'space-between', position: 'relative' }}>
                   
                   <motion.div 
                     className="mobile-info-badge"
@@ -135,7 +146,7 @@ export default function ServicesSection() {
                   </div>
                   <motion.h3 
                     className={!isHovered ? "mobile-pulse-title" : ""}
-                    style={{ ...styles.cardTitle, textAlign: 'center', paddingBottom: '0.5rem', fontSize: '1.2rem' }}
+                    style={{ ...styles.cardTitle, textAlign: 'center', paddingBottom: '0.5rem', fontSize: '1.2rem', fontWeight: '700' }}
                   >
                     {service.title}
                   </motion.h3>
@@ -147,7 +158,7 @@ export default function ServicesSection() {
                     <motion.div
                       className="service-hidden-panel"
                       initial={{ opacity: 0, width: '0%', paddingLeft: 0, marginLeft: 0 }}
-                      animate={{ opacity: 1, width: '65%', paddingLeft: '1.5rem', marginLeft: '0.5rem' }}
+                      animate={{ opacity: 1, width: isMobile ? '70%' : '65%', paddingLeft: isMobile ? '0.5rem' : '1.5rem', marginLeft: isMobile ? '0.2rem' : '0.5rem' }}
                       exit={{ opacity: 0, width: '0%', paddingLeft: 0, marginLeft: 0 }}
                       transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
                       style={{
@@ -159,23 +170,23 @@ export default function ServicesSection() {
                         borderLeft: '1px solid rgba(255,255,255,0.1)' // subtle vertical panel divider
                       }}
                     >
-                      <div className="service-hidden-inner" style={{ width: '220px', display: 'flex', flexDirection: 'column', height: '100%' }}>
+                      <div className="service-hidden-inner" style={{ width: isMobile ? '100%' : '220px', minWidth: isMobile ? '150px' : 'auto', display: 'flex', flexDirection: 'column', height: '100%' }}>
                         
-                        <div style={{ display: 'flex', justifyContent: 'flex-start', gap: '0.8rem', alignItems: 'flex-start', marginTop: '2.5rem' }}>
-                          <h4 className="service-panel-heading" style={{ fontSize: '1rem', lineHeight: '1.4', margin: 0, fontWeight: '600', color: 'var(--color-white)', maxWidth: '150px' }}>
+                        <div style={{ display: 'flex', justifyContent: 'flex-start', gap: '0.4rem', alignItems: 'flex-start', marginTop: isMobile ? '1rem' : '2.5rem' }}>
+                          <h4 className="service-panel-heading" style={{ fontSize: isMobile ? '0.85rem' : '1rem', lineHeight: '1.4', margin: 0, fontWeight: '600', color: 'var(--color-white)', maxWidth: isMobile ? '100%' : '150px' }}>
                             {service.shortDesc}
                           </h4>
                           <motion.div 
                             className="service-panel-arrow"
                             whileHover={{ scale: 1.1, backgroundColor: 'rgba(255,255,255,0.3)' }}
-                            style={{ width: '38px', height: '38px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.15)', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer', flexShrink: 0 }}
+                            style={{ width: isMobile ? '28px' : '38px', height: isMobile ? '28px' : '38px', borderRadius: '50%', backgroundColor: 'rgba(255,255,255,0.15)', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer', flexShrink: 0 }}
                           >
-                            <span style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>↗</span>
+                            <span style={{ fontSize: '1rem', fontWeight: 'bold' }}>↗</span>
                           </motion.div>
                         </div>
                         
-                        <div style={{ marginTop: 'auto', marginBottom: '1.5rem' }}>
-                          <p className="service-panel-desc" style={{ fontSize: '0.85rem', lineHeight: '1.5', opacity: 0.85, margin: 0, letterSpacing: '0.02em' }}>
+                        <div style={{ marginTop: 'auto', marginBottom: isMobile ? '0.5rem' : '1.5rem', paddingRight: '0.4rem' }}>
+                          <p className="service-panel-desc" style={{ fontSize: isMobile ? '0.75rem' : '0.85rem', lineHeight: isMobile ? '1.3' : '1.5', opacity: 0.85, margin: 0, letterSpacing: '0.02em' }}>
                             {service.desc}
                           </p>
                         </div>

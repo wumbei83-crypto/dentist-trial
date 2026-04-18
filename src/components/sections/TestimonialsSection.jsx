@@ -30,7 +30,7 @@ const testimonialsData = [
     tab: 'Orthodontics',
     name: 'Joseph',
     headline: "Joseph's alignment,\nperfected",
-    desc: "Joseph struggled with severe crowding and bite alignment issues that affected his confidence and oral health. He wanted a discreet, effective solution to straighten his teeth without traditional metal brackets.",
+    desc: "Joseph struggled with severe crowding and bite alignment issues that affected his confidence and oral health. He wanted a discreet, effective solution to straighten his teeth with traditional metal brackets.",
     list: [
       "Comprehensive 3D intraoral scanning",
       "Custom clear aligner therapy formulation",

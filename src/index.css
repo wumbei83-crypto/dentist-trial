@@ -119,4 +119,24 @@ code {
     padding: 0.4rem 1rem !important;
     font-size: 0.75rem !important;
   }
+  #specialist {
+    padding: 4rem 1.5rem !important;
+  }
+  #specialist .imageColumn {
+    min-width: 100% !important;
+  }
+  .mobile-award-plaque {
+    right: 0 !important;
+    bottom: -1rem !important;
+    width: 90% !important;
+    padding: 0.8rem !important;
+  }
+  .mobile-award-plaque span {
+    font-size: 0.8rem !important;
+  }
+  .mobile-center-btn {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
 }

@@ -2,23 +2,30 @@ import React from 'react';
 import ClinicExperts from '../../assets/clinic-experts.webp';
 
 export default function SpecialistsSection() {
+  const [isMobile, setIsMobile] = React.useState(typeof window !== 'undefined' ? window.innerWidth <= 768 : false);
+
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
-    <section id="specialist" style={styles.section}>
+    <section id="specialist" style={{ ...styles.section, padding: isMobile ? '4rem 1.5rem' : '6rem 4rem' }}>
       <div style={styles.header}>
         <div style={styles.titleArea}>
           <h2 style={styles.heading}>
-            The experts behind<br/>your confident smile
+            The experts behind your confident smile
           </h2>
         </div>
         <p style={styles.desc}>
-          Our clinic is home to a dedicated team of fully qualified, licensed,<br/>
-          and registered professionals, offering an unparalleled standard<br/>
-          of comprehensive in-house dental care.
+          Our clinic is home to a dedicated team of fully qualified, licensed, and registered professionals, offering an unparalleled standard of comprehensive in-house dental care.
         </p>
       </div>
 
       <div style={styles.singleSpecialistContainer}>
-        <div style={styles.imageColumn}>
+        <div className="imageColumn" style={{ ...styles.imageColumn, minWidth: isMobile ? '100%' : '320px' }}>
           <div style={styles.imgWrapper}>
             {/* Real clinic photo of dentist and patient */}
             <img 
@@ -27,7 +34,7 @@ export default function SpecialistsSection() {
               style={styles.singleImg} 
             />
           </div>
-          <div style={styles.awardPlaque}>
+          <div className="mobile-award-plaque" style={isMobile ? { ...styles.awardPlaque, right: 0, bottom: '-1rem', width: '95%', padding: '0.8rem' } : styles.awardPlaque}>
             <div style={styles.awardIconWrapper}>
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-dark)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
@@ -72,16 +79,18 @@ export default function SpecialistsSection() {
             </li>
           </ul>
 
-          <button 
-            className="btn btn-primary mobile-reduce-btn" 
-            style={{marginTop: '2.5rem', padding: '1rem 2rem', borderRadius: '50px', fontSize: '1.05rem', boxShadow: '0 8px 24px rgba(18, 84, 166, 0.3)'}}
-            onClick={() => {
-              const section = document.getElementById('contact');
-              if (section) section.scrollIntoView({ behavior: 'smooth' });
-            }}
-          >
-            Learn more about our practice →
-          </button>
+          <div className="mobile-center-btn" style={isMobile ? { display: 'flex', justifyContent: 'center', width: '100%' } : {}}>
+            <button 
+              className="btn btn-primary mobile-reduce-btn" 
+              style={{marginTop: '2.5rem', padding: '1rem 2rem', borderRadius: '50px', fontSize: '1.05rem', boxShadow: '0 8px 24px rgba(18, 84, 166, 0.3)'}}
+              onClick={() => {
+                const section = document.getElementById('contact');
+                if (section) section.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Learn more about our practice →
+            </button>
+          </div>
         </div>
       </div>
     </section>
