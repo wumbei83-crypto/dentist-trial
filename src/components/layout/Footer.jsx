@@ -56,7 +56,7 @@ export default function Footer() {
         {/* Column 4 — Visit Hours */}
         <div style={styles.infoCol}>
           <p style={styles.colHeading}>VISIT HOURS</p>
-          <p style={styles.infoTextPlain}>Mon – Sat: 8:00 AM – 5:00 PM</p>
+          <p style={styles.infoTextPlain}>Mon – Sat: 9:00 AM – 6:00 PM</p>
           <p style={styles.infoTextPlain}>Sunday: Closed</p>
         </div>
 

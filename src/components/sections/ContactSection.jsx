@@ -151,7 +151,7 @@ ${formData.message}`;
                 <div>
                   <p style={styles.infoLabel}>Working Hours</p>
                   <p style={styles.infoValue}>Monday – Saturday</p>
-                  <p style={styles.infoValue}>8:00 am – 5:00 pm</p>
+                  <p style={styles.infoValue}>9:00 am – 6:00 pm</p>
                 </div>
               </div>
 

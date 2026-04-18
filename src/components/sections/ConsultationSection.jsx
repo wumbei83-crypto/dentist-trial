@@ -76,7 +76,7 @@ export default function ConsultationSection() {
       
       // Open Monday (1) to Saturday (6), from 8 AM to 4:59 PM.
       const isWorkingDay = currentDay !== 0;
-      const isWorkingHour = currentHour >= 8 && currentHour < 17;
+      const isWorkingHour = currentHour >= 9 && currentHour < 18;
       
       setIsOpen(isWorkingDay && isWorkingHour);
     };
