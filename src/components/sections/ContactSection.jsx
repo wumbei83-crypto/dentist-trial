@@ -5,8 +5,16 @@ import contactBg from '../../assets/contact-bg.png';
 export default function ContactSection() {
   const [formData, setFormData] = useState({ name: '', phone: '', email: '', message: '' });
   const [sent, setSent] = useState(false);
+  const [isMobile, setIsMobile] = useState(typeof window !== 'undefined' ? window.innerWidth <= 768 : false);
   const sectionRef = useRef(null);
   const isInView = useInView(sectionRef, { once: false, margin: '-100px' });
+
+  React.useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    handleResize(); // immediate override
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -31,7 +39,7 @@ ${formData.message}`;
   };
 
   return (
-    <section id="contact" className="contact-section" style={styles.section} ref={sectionRef}>
+    <section id="contact" className="contact-section" style={{...styles.section, padding: isMobile ? '4rem 1.5rem' : '6rem 4rem'}} ref={sectionRef}>
 
       {/* Background image + blue overlay — identical approach to AboutSection */}
       <div style={styles.bgContainer}>
@@ -51,7 +59,7 @@ ${formData.message}`;
       <div style={styles.contentWrapper}>
 
         {/* Top row: heading on the left, badge on the right */}
-        <div style={styles.topRow}>
+        <div style={{...styles.topRow, flexDirection: isMobile ? 'column' : 'row', gap: isMobile ? '1.5rem' : '0'}}>
           <div style={styles.topLeft}>
             <h2 style={styles.heading}>
               Get in touch.<br />
@@ -69,7 +77,7 @@ ${formData.message}`;
         </div>
 
         {/* Bottom row: form (left) | info + map (right) */}
-        <div className="contact-bottom-row" style={styles.bottomRow}>
+        <div className="contact-bottom-row" style={{...styles.bottomRow, flexDirection: isMobile ? 'column' : 'row'}}>
 
           {/* Contact Form */}
           <motion.div
@@ -129,12 +137,12 @@ ${formData.message}`;
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            style={styles.infoCol}
+            style={{...styles.infoCol, width: isMobile ? '100%' : 'auto'}}
           >
             {/* Info cards */}
             <div style={styles.infoCards}>
               {/* Hours */}
-              <div style={styles.infoCard}>
+              <div style={{...styles.infoCard, padding: isMobile ? '1rem' : '1.2rem 1.5rem'}}>
                 <div style={styles.iconCircle}>
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
